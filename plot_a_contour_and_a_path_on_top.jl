@@ -21,7 +21,8 @@ plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
               colorbar_title = "\$\\phi\$",
               colorbar = :right,
               xlabel = "\$x\$",
-              ylabel = "\$y\$")
+              ylabel = "\$y\$",
+              color = :viridis)
 
 # Overlay random path on top
 xpath = rand(x,10)
