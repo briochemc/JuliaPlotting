@@ -24,10 +24,13 @@ plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
               ylabel = "\$y\$",
               color = :viridis)
 
-# Overlay random path on top
+# Overlay random paths on top
 xpath = rand(x,10)
 ypath = rand(y,10)
 plt = plot!(xpath, ypath, color = :black, m=(:white, stroke(1,:black)), lab="NewtonMethod")
+xpath = rand(x/2,10)
+ypath = rand(y/2,10)
+plt = plot!(xpath, ypath, color = :black, m=(:red, stroke(1,:black)), lab="NewtonMethodTrustRegion")
 
 display(plt)
 savefig(plt, "test.eps")
