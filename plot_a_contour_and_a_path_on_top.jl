@@ -26,7 +26,7 @@ plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
 # Overlay random path on top
 xpath = rand(x,10)
 ypath = rand(y,10)
-plt = plot!(xpath, ypath, color = :black, marker = "o")
+plt = plot!(xpath, ypath, color = :black, m=(:white, stroke(1,:black)), lab="NewtonMethod")
 
 display(plt)
 savefig(plt, "test.eps")
