@@ -10,10 +10,15 @@ end
 
 x = range(-3, stop = 3, length = 100)
 y = range(-2, stop = 2, length = 80)
-levels = collect(-1:0.2:1)
+levels = collect(-4:0.25:4)
+vmin = minimum(levels)
+vmax = maximum(levels)
 
 using Plots
-# using PyPlot
-# using Plotly, ORCA
-plt = contourf(x, y, peaks; levels = levels)
+pyplot() # Set the backend to PyPlot
+plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax))
+display(plt)
 savefig(plt, "test.eps")
+savefig(plt, "test.png")
+savefig(plt, "test.svg")
+savefig(plt, "test.html")
