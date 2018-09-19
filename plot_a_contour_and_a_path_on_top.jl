@@ -14,6 +14,7 @@ levels = collect(-4:0.25:4)
 vmin = minimum(levels)
 vmax = maximum(levels)
 
+# Filled contour background
 using Plots
 pyplot() # Set the backend to PyPlot
 plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
@@ -21,6 +22,12 @@ plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
               colorbar = :right,
               xlabel = "\$x\$",
               ylabel = "\$y\$")
+
+# Overlay random path on top
+xpath = rand(x,10)
+ypath = rand(y,10)
+plt = plot!(xpath, ypath, color = :black, marker = "o")
+
 display(plt)
 savefig(plt, "test.eps")
 savefig(plt, "test.pdf")
