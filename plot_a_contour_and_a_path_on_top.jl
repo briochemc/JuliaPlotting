@@ -10,31 +10,38 @@ end
 
 x = range(-3, stop = 3, length = 100)
 y = range(-2, stop = 2, length = 80)
+z = [peaks(x, y) for y in y, x in x]
 levels = collect(-4:0.25:4)
-vmin = minimum(levels)
-vmax = maximum(levels)
 
 # Filled contour background
-using Plots
-pyplot() # Set the backend to PyPlot
-plt = contourf(x, y, peaks, levels = levels, clim = (vmin, vmax),
-              colorbar_title = "\$\\phi\$",
-              colorbar = :right,
-              xlabel = "\$x\$",
-              ylabel = "\$y\$",
-              color = :viridis)
+#using Plots
+#pyplot() # Set the backend to PyPlot
+using PyPlot, PyCall
+clf()
+plt = contourf(x, y, z,
+               levels = levels,
+               extend = :both)
+xlabel("\$x\$")
+ylabel("\$y\$")
+
+# Colorbar
+cbar = colorbar(plt)
+cbar["set_label"]("\$\\varphi\$")
 
 # Overlay random paths on top
 xpath = rand(x,10)
 ypath = rand(y,10)
-plt = plot!(xpath, ypath, color = :black, m=(:white, stroke(1,:black)), lab="NewtonMethod")
+
+plt = plot(xpath, ypath, color = "black", linestyle="-", marker="o", markersize=5, markeredgecolor = "black", markerfacecolor = "white", label="NewtonMethod")
 xpath = rand(x/2,10)
 ypath = rand(y/2,10)
-plt = plot!(xpath, ypath, color = :black, m=(:red, stroke(1,:black)), lab="NewtonMethodTrustRegion")
+plt = plot(xpath, ypath, color = "black", linestyle="-", marker="o", markersize=5, markeredgecolor = "black", markerfacecolor = "red", label="NewtonMethodTrustRegion")
+
+title("My nice looking figure")
+legend()
 
 display(plt)
-savefig(plt, "test.eps")
-savefig(plt, "test.pdf")
-savefig(plt, "test.png")
-savefig(plt, "test.svg")
-savefig(plt, "test.html")
+savefig("test.eps")
+savefig("test.pdf")
+savefig("test.png")
+savefig("test.svg")
